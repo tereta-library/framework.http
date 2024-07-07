@@ -1,0 +1,17 @@
+{
+    "name": "tereta/framework.http",
+    "description": "Part of framework to process HTTP requests",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Tereta\\Framework\\Http\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tereta Alexander",
+            "email": "tereta.alexander@gmail.com"
+        }
+    ],
+    "require": {}
+}

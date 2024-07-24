@@ -15,27 +15,20 @@ use Framework\Http\Interface\Router as RouterInterface;
  * ·······································································
  * ·······································································
  *
- * @interface Framework\Http\Router\Expression
+ * @router HttpRouterItem
+ * @interface Framework\Http\Router\Item
  * @package Framework\Http\Router
  * @link https://tereta.dev
  * @author Tereta Alexander <tereta.alexander@gmail.com>
  */
-class Expression implements RouterInterface
+class Item implements RouterInterface
 {
-    const ROUTER = "expression";
-
-    const METHOD_GET = 'GET';
-    const METHOD_POST = 'POST';
-    const METHOD_PUT = 'PUT';
-    const METHOD_DELETE = 'DELETE';
+    const ROUTER = "item";
 
     /**
      * @param string $action
-     * @param array $params [method, expression]
      */
-    public function __construct(private string $action, array $params) {
-        $this->method = $params[0];
-        $this->expression = $params[1];
+    public function __construct(private string $action) {
     }
 
     /**
@@ -44,11 +37,8 @@ class Expression implements RouterInterface
      * @param string $path
      * @return Action|null
      */
-    public function run(string $method, string $host, string $path): ?Action {
-        if ($method != $this->method) return null;
-        if (!preg_match($this->expression, $path, $params)) return null;
-
-        array_shift($params);
-        return new Action($this->action, $params);
+    public function run(string $method, string $host, string $path): ?Action
+    {
+        return new Action($this->action);
     }
 }

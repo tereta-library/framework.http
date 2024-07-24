@@ -2,8 +2,6 @@
 
 namespace Framework\Http\Router;
 
-use Framework\Http\Interface\Router as RouterInterface;
-
 /**
  * ···························WWW.TERETA.DEV······························
  * ·······································································
@@ -15,40 +13,46 @@ use Framework\Http\Interface\Router as RouterInterface;
  * ·······································································
  * ·······································································
  *
- * @interface Framework\Http\Router\Expression
+ * @interface Framework\Http\Router\Action
  * @package Framework\Http\Router
  * @link https://tereta.dev
  * @author Tereta Alexander <tereta.alexander@gmail.com>
  */
-class Expression implements RouterInterface
+class Action
 {
-    const ROUTER = "expression";
+    /**
+     * @var string $action
+     */
+    private string $action;
 
-    const METHOD_GET = 'GET';
-    const METHOD_POST = 'POST';
-    const METHOD_PUT = 'PUT';
-    const METHOD_DELETE = 'DELETE';
+    /**
+     * @var array $params
+     */
+    private array $params;
 
     /**
      * @param string $action
-     * @param array $params [method, expression]
+     * @param array $params
      */
-    public function __construct(private string $action, array $params) {
-        $this->method = $params[0];
-        $this->expression = $params[1];
+    public function __construct(string $action, array $params = [])
+    {
+        $this->action = $action;
+        $this->params = $params;
     }
 
     /**
-     * @param string $method
-     * @param string $host
-     * @param string $path
-     * @return Action|null
+     * @return string
      */
-    public function run(string $method, string $host, string $path): ?Action {
-        if ($method != $this->method) return null;
-        if (!preg_match($this->expression, $path, $params)) return null;
+    public function getAction(): string
+    {
+        return $this->action;
+    }
 
-        array_shift($params);
-        return new Action($this->action, $params);
+    /**
+     * @return array
+     */
+    public function getParams(): array
+    {
+        return $this->params;
     }
 }

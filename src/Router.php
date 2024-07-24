@@ -3,6 +3,7 @@
 namespace Framework\Http;
 
 use Framework\Http\Router\General as StaticRouter;
+use Framework\Http\Router\Action;
 
 /**
  * Library\Http\Router
@@ -15,7 +16,6 @@ class Router {
 
     /**
      * @param array $routers
-     * @param $errorRouter
      */
     public function __construct(array $routers = []) {
         $this->routers = $routers;
@@ -25,9 +25,9 @@ class Router {
      * @param string $method
      * @param string $host
      * @param string $path
-     * @return string|null
+     * @return Action|null
      */
-    public function run(string $method, string $host, string $path): ?string
+    public function run(string $method, string $host, string $path): ?Action
     {
         foreach ($this->routers as $router) {
             $return = $router->run($method, $host, $path);

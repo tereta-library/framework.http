@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Framework\Http\Router;
+namespace Framework\Http;
 
-use Framework\Http\Interface\Router as RouterInterface;
+use Framework\Application\Interface\Module as ModuleInterface;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -15,40 +15,11 @@ use Framework\Http\Interface\Router as RouterInterface;
  * ·······································································
  * ·······································································
  *
- * @interface Framework\Http\Router\Expression
- * @package Framework\Http\Router
+ * @class Framework\Http\Module
+ * @package Framework\Http
  * @link https://tereta.dev
  * @author Tereta Alexander <tereta.alexander@gmail.com>
  */
-class Expression implements RouterInterface
+class Module implements ModuleInterface
 {
-    const ROUTER = "expression";
-
-    const METHOD_GET = 'GET';
-    const METHOD_POST = 'POST';
-    const METHOD_PUT = 'PUT';
-    const METHOD_DELETE = 'DELETE';
-
-    /**
-     * @param string $action
-     * @param array $params [method, expression]
-     */
-    public function __construct(private string $action, array $params) {
-        $this->method = $params[0];
-        $this->expression = $params[1];
-    }
-
-    /**
-     * @param string $method
-     * @param string $host
-     * @param string $path
-     * @return Action|null
-     */
-    public function run(string $method, string $host, string $path): ?Action {
-        if ($method != $this->method) return null;
-        if (!preg_match($this->expression, $path, $params)) return null;
-
-        array_shift($params);
-        return new Action($this->action, $params);
-    }
 }

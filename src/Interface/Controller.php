@@ -20,5 +20,5 @@ namespace Framework\Http\Interface;
  */
 interface Controller
 {
-
+    const ROUTER = "HttpRouterItem";
 }

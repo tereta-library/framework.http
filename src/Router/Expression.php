@@ -24,6 +24,7 @@ class Expression implements RouterInterface
 {
     const ROUTER = "expression";
 
+    const METHOD_ANY = 'ANY';
     const METHOD_GET = 'GET';
     const METHOD_POST = 'POST';
     const METHOD_PUT = 'PUT';
@@ -45,7 +46,7 @@ class Expression implements RouterInterface
      * @return Action|null
      */
     public function run(string $method, string $host, string $path): ?Action {
-        if ($method != $this->method) return null;
+        if ($this->method != static::METHOD_ANY && $method != $this->method) return null;
         if (!preg_match($this->expression, $path, $params)) return null;
 
         array_shift($params);

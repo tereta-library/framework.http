@@ -38,8 +38,7 @@ class Expression implements RouterInterface
      * @param array $params [method, expression]
      */
     public function __construct(private string $action, array $params) {
-        $this->method = $params[0];
-        $this->expression = $params[1];
+        list($this->method, $this->expression) = $params;
     }
 
     /**

@@ -34,6 +34,16 @@ class Expression implements RouterInterface
     const METHOD_DELETE = 'DELETE';
 
     /**
+     * @var string|mixed
+     */
+    private string $method;
+
+    /**
+     * @var string|mixed
+     */
+    private string $expression;
+
+    /**
      * @param string $action
      * @param array $params [method, expression]
      */

@@ -53,11 +53,12 @@ class Expression implements RouterInterface
 
     /**
      * @param string $method
+     * @param string $scheme
      * @param string $host
      * @param string $path
      * @return Action|null
      */
-    public function run(string $method, string $host, string $path): ?Action {
+    public function run(string $method, string $scheme, string $host, string $path): ?Action {
         if ($this->method != static::METHOD_ANY && $method != $this->method) return null;
         if (!preg_match($this->expression, $path, $params)) return null;
 

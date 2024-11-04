@@ -23,14 +23,15 @@ class Router {
 
     /**
      * @param string $method
+     * @param string $scheme
      * @param string $host
      * @param string $path
      * @return Action|null
      */
-    public function run(string $method, string $host, string $path): ?Action
+    public function run(string $method, string $scheme, string $host, string $path): ?Action
     {
         foreach ($this->routers as $router) {
-            $return = $router->run($method, $host, $path);
+            $return = $router->run($method, $scheme, $host, $path);
             if ($return !== null) {
                 return $return;
             }

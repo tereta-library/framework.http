@@ -29,5 +29,5 @@ interface Router
      * @param string $path
      * @return mixed
      */
-    public function run(string $method, string $host, string $path);
+    public function run(string $method, string $scheme, string $host, string $path);
 }
